@@ -538,6 +538,17 @@ section.sec:first-child{border-top:0;padding-top:48px}
 .gs-banner p{font-size:16px;color:var(--lav-text)}
 .gs-banner p b{color:var(--lav-head)}
 
+/* rate bands */
+.bands{display:grid;gap:14px;grid-template-columns:1fr}
+@media (min-width:720px){.bands{grid-template-columns:repeat(3,1fr)}}
+.band{background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px 26px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.band-rate{font-size:clamp(26px,3.2vw,32px);font-weight:900;letter-spacing:-.03em;line-height:1}
+.band-exp{font-size:15.5px;line-height:1.4;color:var(--text-muted)}
+.band-exp b{color:var(--text)}
+.band-name{margin-top:6px;padding:6px 16px;border-radius:var(--pill);border:1px solid var(--lime);color:var(--accent-text);font-size:13.5px;font-weight:800;letter-spacing:.04em}
+:root[data-theme="light"] .band-name{background:var(--lime);border-color:var(--lime);color:var(--ink)}
+@media (max-width:640px){.band{padding:20px}}
+
 /* dbs facts */
 .facts{display:grid;gap:14px;grid-template-columns:1fr;margin-bottom:26px}
 @media (min-width:640px){.facts{grid-template-columns:repeat(3,1fr)}}
@@ -987,8 +998,8 @@ footer{border-top:1px solid var(--border);padding-block:36px 56px;margin-top:24p
             <div class="wbody">
               <div class="whead"><span class="hnum">3</span><span class="wtag">Create your account</span></div>
               <h3>Verify your mobile</h3>
-              <p>Enter your number, press <b>Send code</b>, then type the <b>6 digit code</b> we text you.</p>
-              <p class="wtip">Only for booking reminders and free trial alerts. <b>Never spam.</b></p>
+              <p>Enter your number, press <b>Send code</b>, then type the <b>6 digit code</b> we text you. Only for booking reminders and alerts, never spam.</p>
+              <p class="wtip"><b>Check you have signal first.</b> College rooms are notorious for it, and the code expires, so if nothing arrives move somewhere with bars and send again.</p>
             </div>
           </li>
 
@@ -1283,20 +1294,28 @@ footer{border-top:1px solid var(--border);padding-block:36px 56px;margin-top:24p
         </div>
 
         <h3 class="subhead" id="pay-how">How payment works</h3>
-        <p class="sublede">The rate scale runs from £30 to £60 an hour, in £5 steps. You keep 70% of your listed price after VAT and Stripe fees. Set your rate under <b>My account</b>, then <b>Payment</b>.</p>
+        <p class="sublede">You set an hourly rate between £30 and £60, and it's what students and parents see when they come to book you. You keep 70% of it after VAT and Stripe's fee, and every tutor is on the same 70%. Pick the band that matches your teaching experience.</p>
 
-        <div class="scale" role="list" aria-label="Hourly rates">
-          <span class="step-pill" role="listitem">£30</span>
-          <span class="step-pill" role="listitem">£35</span>
-          <span class="step-pill" role="listitem">£40</span>
-          <span class="step-pill" role="listitem">£45</span>
-          <span class="step-pill" role="listitem">£50</span>
-          <span class="step-pill" role="listitem">£55</span>
-          <span class="step-pill on" role="listitem">£60</span>
+        <div class="bands" role="list" aria-label="Hourly rate bands">
+          <div class="band" role="listitem">
+            <span class="band-rate tnum">£30 &ndash; £40</span>
+            <span class="band-exp"><b>0 to 2 years</b> experience</span>
+            <span class="band-name">Core</span>
+          </div>
+          <div class="band" role="listitem">
+            <span class="band-rate tnum">£40 &ndash; £50</span>
+            <span class="band-exp"><b>2 to 3 years</b> experience</span>
+            <span class="band-name">Expert</span>
+          </div>
+          <div class="band" role="listitem">
+            <span class="band-rate tnum">£50 &ndash; £60</span>
+            <span class="band-exp"><b>3+ years</b> experience</span>
+            <span class="band-name">Scholar</span>
+          </div>
         </div>
 
         <div class="inset mt24">
-          <b>You're already at the top of the scale.</b> As active tutors, we'd suggest keeping your current rate. Message support@studia.io if any concerns.
+          <b>Your price is fixed at the moment a lesson is booked.</b> Changing your price will be allowed later. If you need yours looked at in the meantime, email <span class="emph">support@studia.io</span>.
         </div>
 
         <div class="lav mt32" id="pay-transparent">
@@ -1315,7 +1334,7 @@ footer{border-top:1px solid var(--border);padding-block:36px 56px;margin-top:24p
         </article>
 
         <h3 class="subhead" id="pay-example">Exemplar pay breakdown</h3>
-        <p class="sublede">In this spirit, here is the exact breakdown of a lesson.</p>
+        <p class="sublede">In this spirit, here is the exact breakdown of a £60 lesson. VAT is one sixth of the price. The Stripe fee is the real fee on that payment, so it moves a few pence either way depending on the card. Your share is rounded down to the penny.</p>
 
         <div class="breakdown">
         <div class="payslip">
@@ -1403,32 +1422,12 @@ footer{border-top:1px solid var(--border);padding-block:36px 56px;margin-top:24p
         </div>
 
         <h3 class="subhead" id="pay-faq">How and when do I get paid?</h3>
-        <p class="sublede">Your money makes two moves. First your share leaves Studia for your own Stripe account, three working days after the lesson. Then every Monday at 15:00 Stripe sends your whole balance to your bank. The day you teach decides how long that takes.</p>
+        <p class="sublede">Twice a month, straight into your bank.</p>
 
-        <div class="tl">
-          <div class="tl-case">
-            <p class="tl-title"><span class="tl-tag tl-tag--best">Best case</span>Five days</p>
-            <ol class="tl-steps">
-              <li><span class="tl-day">Wed</span><span class="tl-what">You teach</span></li>
-              <li><span class="tl-day">Mon</span><span class="tl-what">Your share lands in your Stripe account</span></li>
-              <li class="tl-end"><span class="tl-day">Mon</span><span class="tl-what">Same afternoon, it goes to your bank</span></li>
-            </ol>
-          </div>
-          <div class="tl-case">
-            <p class="tl-title"><span class="tl-tag tl-tag--worst">Least ideal case</span>Eleven days</p>
-            <ol class="tl-steps">
-              <li><span class="tl-day">Thu</span><span class="tl-what">You teach</span></li>
-              <li><span class="tl-day">Tue</span><span class="tl-what">Your share lands in your Stripe account</span></li>
-              <li class="tl-end"><span class="tl-day">Mon</span><span class="tl-what">It waits for the next Monday payout</span></li>
-            </ol>
-          </div>
+        <div class="inset">
+          <b>You're paid on the 2nd and 4th Thursday of every month.</b> Each payment covers the lessons you taught in the fortnight before it, and it reaches your bank that same afternoon. There's nothing to submit and no invoice to raise: a lesson counts the moment it finishes.
         </div>
 
-        <div class="inset mt24">
-          <b>Why the wait at all.</b> The three working day gap is deliberate. A family has 48 hours after a lesson to raise a problem, and holding the payment just past that window means we can sort it out before money moves.
-          <span class="towards">What we're working towards</span>
-          Paying out twice a week, so you get it quicker. We very much want to pay you sooner.
-        </div>
       </section>
 
       <!-- AVAILABILITY -->
